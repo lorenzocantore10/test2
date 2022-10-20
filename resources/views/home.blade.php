@@ -7,6 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
 <h1>Prova</h1>
+<h3>successo</h3>
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
