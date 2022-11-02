@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ChartJsController;
+use App\Http\Controllers\GraficoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +21,12 @@ Route::get('/', function () {
 Route::get('/grafici', function () {
     return view('grafici');
 });
+Route::get('/form', function () {
+    return view('form.soccer');
+});
+//rotta che mi porta al form del wallet
+Route::get('/wallet', function () {
+    return view('form.walletForm');});
 
 Auth::routes();
 
@@ -28,4 +34,16 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 //Rotte grafici
-Route::get('chart', [ChartJsController::class, 'index']);
+Route::get('grafici',[App\Http\Controllers\GraficoController::class,'index']);
+//Rotta secondo grafico
+Route::get('grafici2',[App\Http\Controllers\ChartController::class,'index'])->name('popolazione');
+//rotta per aggiornare il form calciatore
+Route::post('/',[App\Http\Controllers\HomeController::class,'insert'])->name('soccer');
+
+//rotta grafico calcio
+Route::get('/marcatori',[App\Http\Controllers\HomeController::class,'marcatori'])->name('marcatori');
+
+//rotta ggiorna form wallet
+Route::post('/home',[App\Http\Controllers\HomeController::class,'insert2'])->name('wallet');
+//rotta grafico wallet
+ Route::get('/ral',[App\Http\Controllers\HomeController::class,'ral'])->name('ral');
