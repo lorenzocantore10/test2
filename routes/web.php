@@ -26,7 +26,7 @@ Route::get('/form', function () {
 });
 //rotta che mi porta al form del wallet
 Route::get('/wallet', function () {
-    return view('form.walletForm');});
+    return view('form.wallet');});
 
 Auth::routes();
 
@@ -43,7 +43,7 @@ Route::post('/',[App\Http\Controllers\HomeController::class,'insert'])->name('so
 //rotta grafico calcio
 Route::get('/marcatori',[App\Http\Controllers\HomeController::class,'marcatori'])->name('marcatori');
 
-//rotta ggiorna form wallet
+//rotta aggiorna form wallet
 Route::post('/home',[App\Http\Controllers\HomeController::class,'insert2'])->name('wallet');
 //rotta grafico wallet
  Route::get('/ral',[App\Http\Controllers\HomeController::class,'ral'])->name('ral');

@@ -82,31 +82,29 @@ class HomeController extends Controller
    }
    public function ral(){
     $wallets=Wallet::all();
-    //dal modello Wallet prendimi tutto e salvalo nella var $players
-    //dd($players);//col dd di player all mi prende tutto l'ogetto,io voglio un array semplice che contenga esclusivamente nome e gol
-    $players = DB::table('players')->select('nome', 'goal','assist','presenze')->get();//nella var player mi prendo dal DB dalla tab.players nom e gol
-    //dd($players);
+   // dal modello Wallet prendimi tutto e salvalo nella var $wallet
+   // dd($wallets);//col dd di wallets all mi prende tutto l'ogetto,
+    $wallets = DB::table('wallets')->select('nome','mensilita','guadagno')->get();//nella var wallets mi prendo gli attributi,nome mensilita e guadagno
+   
 
-    $arrayNomi =[];//faccio un avar arrayNomi ed un ciclo for im cui arrayNOMI di i e uguale al nome di i
-    for(  $i = 0;  $i < count($players); $i++){
-        $arrayNomi[$i] = $players[$i]->nome;
+    $arrayNome =[];//faccio una var arrayNomi ed un ciclo for im cui arrayNOMe di i e uguale al nome di i
+    for(  $i = 0;  $i < count($wallets); $i++){
+        $arrayNome[$i] = $wallets[$i]->nome;
     }
     //dd($arrayNomi);
 
-    $arrayGoal=[];
-    for(  $i = 0;  $i < count($players); $i++){
-        $arrayGoal[$i] =$players[$i]->goal;
+    $arrayMensilita=[];     //nella var arrayMensilita faccio un ciclo for,minore della lunghezza wallets,incremento,im cui arraymensilita di i e =alla mensilita di i
+    for(  $i = 0;  $i < count($wallets); $i++){
+        $arrayMensilita[$i] =$wallets[$i]->mensilita;
     }
-   // dd($arrayGoal); //mi stamnpera esclusivamente il n.di gol,cioe' 37 e 42
-    $arrayAssist=[];
-    for(  $i = 0;  $i < count($players); $i++){
-        $arrayAssist[$i] = $players[$i]->assist;
+   
+    $arrayGuadagno=[];
+    for(  $i = 0;  $i < count($wallets); $i++){
+        $arrayGuadagno[$i] = $wallets[$i]->guadagno;
     }
-    $arrayPresenze=[];
-    for($i=0;$i<count($players);$i++){
-        $arrayPresenze[$i]=$players[$i]->presenze;
-    }
-    return view('statistiche',compact('arrayNomi', 'arrayGoal','arrayAssist','arrayPresenze'));
+    
+    
+    return view('statistiche2',compact('arrayNome', 'arrayMensilita','arrayGuadagno',));
 }   
 
    }

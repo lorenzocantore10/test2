@@ -43,6 +43,12 @@
                 <a class="navbar-brand" href="{{url('/marcatori')}}">
                     CalcioStatistiche
                 </a>
+                <a class="navbar-brand" href="{{url('/wallet')}}">
+                    Inserisci ral
+                </a>
+                <a class="navbar-brand" href="{{url('/ral')}}">
+                    Vedi Ral
+                </a>
                 
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
