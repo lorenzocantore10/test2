@@ -12,6 +12,21 @@
     <input type="text" class="form-control" id="nome" name="nome" >
     
   </div>
+  
+  <select name="club" class="form-select mb-3" aria-label="Default select example">
+  <option selected>Club</option>
+  @foreach($teams as $team)
+  @if($team->tipo =='CLUB')
+  <option value="{{$team->nome}}">{{$team->nome}}</option>@endif @endforeach
+ 
+</select>
+<select name="nazionale" class="form-select" aria-label="Default select example">
+  <option selected>Squadra nazionale</option>
+  @foreach($teams as $team)
+  @if($team->tipo=='NAZIONALE')
+  <option value="{{$team->nome}}">{{$team->nome}}</option>@endif @endforeach
+  
+</select>
   <div class="mb-3">
     <label for="goal" class="form-label">Nr.goal segnati</label>
     <input type="text" class="form-control" id="goal" name="goal">

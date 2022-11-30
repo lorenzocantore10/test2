@@ -14,4 +14,9 @@ class Player extends Model
         'goal',
         'assist',
         'presenze'];
+
+        public function teams(){
+            return $this->belongsToMany('App\Models\Team');
+        }
+
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Player;
+use App\Models\Team;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,20 +29,35 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    public function insert(Request $request) //mi richiamo la funzione della rotta,cioe' insert
-    {
-        $Player= new Player(); //mi creo un ogetto giocatore seguendo il modello
+    public function form(){
+        $teams=Team::all();
 
-        $Player->nome = request('nome');//e conme un this->name,nel campo nome giocatore,è richiesto il nome
+        return view('form.soccer',compact('teams'));
+
+    }
+
+    public function insert(Request $request) //mi richiamo la funzione della rotta,cioe' insert
+    { //dd($request->nazionale);
+        $club =$request->club;
+        $nazionale= $request->nazionale;
+        $team_ids=Team::whereIn('nome', [$club, $nazionale])->pluck('id')->toArray();
+  
+        //dd($team_ids);
+        $Player= new Player(); //mi creo un ogetto giocatore seguendo il modello
+        
+        $Player->nome = request('nome');//e conme un this->name,nel campo nome giocatore,è richiesto il nome 
         $Player->goal = request('goal');//nel campo giocatore gol,è richiesto il numero di goals
         $Player->assist=request('assist');
         $Player->presenze=request('presenze');
         $Player->save();//infine mi salvo l'ogetto player
 
+        $Player->teams()->sync($team_ids);
+        
         return redirect('home');
     }
     public function marcatori(){
         $players=Player::all();
+        // dd($players);
         //dal modello Player prendimi tutto e salvalo nella var $players
         //dd($players);//col dd di player all mi prende tutto l'ogetto,io voglio un array semplice che contenga esclusivamente nome e gol
         $players = DB::table('players')->select('nome', 'goal','assist','presenze')->get();//nella var player mi prendo dal DB dalla tab.players nom e gol
@@ -66,7 +82,7 @@ class HomeController extends Controller
         for($i=0;$i<count($players);$i++){
             $arrayPresenze[$i]=$players[$i]->presenze;
         }
-        return view('statistiche',compact('arrayNomi', 'arrayGoal','arrayAssist','arrayPresenze'));
+        return view('statistiche',compact('arrayNomi', 'arrayGoal','arrayAssist','arrayPresenze','players'));
     }   
    public function insert2( Request $request)
    {
@@ -107,6 +123,11 @@ class HomeController extends Controller
     return view('statistiche2',compact('arrayNome', 'arrayMensilita','arrayGuadagno',));
 }   
 
+    public function contatti(){
+        $contacts = DB::table('contacts')->select('email', 'telefono','facebook')->get();
+        //nella var contacts mi prendo dal db,dalla tabella contatti email,telefono e facebook
+        return view('contatti',compact('contacts'));
+    }
    }
 
 

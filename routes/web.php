@@ -21,17 +21,18 @@ Route::get('/', function () {
 Route::get('/grafici', function () {
     return view('grafici');
 });
-Route::get('/form', function () {
-    return view('form.soccer');
-});
+
 //rotta che mi porta al form del wallet
 Route::get('/wallet', function () {
     return view('form.wallet');});
 
+   
+    
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::get('/form', [App\Http\Controllers\HomeController::class, 'form'])->name('form');
 
 //Rotte grafici
 Route::get('grafici',[App\Http\Controllers\GraficoController::class,'index']);
@@ -47,3 +48,5 @@ Route::get('/marcatori',[App\Http\Controllers\HomeController::class,'marcatori']
 Route::post('/home',[App\Http\Controllers\HomeController::class,'insert2'])->name('wallet');
 //rotta grafico wallet
  Route::get('/ral',[App\Http\Controllers\HomeController::class,'ral'])->name('ral');
+ //rotta contatti
+ Route::get('/contatti',[App\Http\Controllers\HomeController::class,'contatti'])->name('contatti');
