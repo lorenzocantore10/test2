@@ -40,6 +40,9 @@
                 <a class="navbar-brand" href="{{url('/form')}}">
                     Inserisci Giocatore
                 </a>
+                <a class="navbar-brand" href="{{route('team')}}">
+                    Inserisci Squadra
+                </a>
                 <a class="navbar-brand" href="{{url('/marcatori')}}">
                     CalcioStatistiche
                 </a>

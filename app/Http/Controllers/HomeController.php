@@ -128,6 +128,19 @@ class HomeController extends Controller
         //nella var contacts mi prendo dal db,dalla tabella contatti email,telefono e facebook
         return view('contatti',compact('contacts'));
     }
+    public function addTeam(Request $request){
+        $tipo=$request->tipo;
+        $nome=$request->nome;
+        //dd($tipo);
+        $squadra=new Team();
+        //dd($squadra);
+        $squadra->nome=$nome;
+        $squadra->tipo=$tipo;
+        //dd($squadra);
+        $squadra->save();
+
+        return back();
+    }
    }
 
 

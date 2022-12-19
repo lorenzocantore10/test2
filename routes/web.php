@@ -25,7 +25,8 @@ Route::get('/grafici', function () {
 //rotta che mi porta al form del wallet
 Route::get('/wallet', function () {
     return view('form.wallet');});
-
+Route::get('/team', function () {
+    return view('form.team');})->name('team');
    
     
 
@@ -50,3 +51,5 @@ Route::post('/home',[App\Http\Controllers\HomeController::class,'insert2'])->nam
  Route::get('/ral',[App\Http\Controllers\HomeController::class,'ral'])->name('ral');
  //rotta contatti
  Route::get('/contatti',[App\Http\Controllers\HomeController::class,'contatti'])->name('contatti');
+ Route::post('/addTeam',[App\Http\Controllers\HomeController::class,'addTeam'])->name('addTeam');
+ 
